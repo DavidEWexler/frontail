@@ -1,17 +1,12 @@
-# frontail – streaming logs to the browser
+# mining-frontail – mining config and streaming logs to the browser
 
-```frontail``` is a Node.js application for streaming logs to the browser. It's a `tail -F` with UI.
+```mining-frontail``` us currently under development and is a fork of [frontail](https://github.com/mthenw/frontail/)
 
 ![frontial](https://user-images.githubusercontent.com/455261/29570317-660c8122-8756-11e7-9d2f-8fea19e05211.gif)
 
-[![Build Status](https://img.shields.io/travis/mthenw/frontail.svg?style=flat)](https://travis-ci.org/mthenw/frontail)
-[![Docker Pulls](https://img.shields.io/docker/pulls/mthenw/frontail.svg)](https://hub.docker.com/r/mthenw/frontail/)
-
 ## Quick start
 
-- `npm i frontail -g` or download a binary file from [Releases](https://github.com/mthenw/frontail/releases) page
-- `frontail /var/log/syslog`
-- visit [http://127.0.0.1:9001](http://127.0.0.1:9001)
+- Coming Soon
 
 ## Features
 
@@ -24,16 +19,15 @@
 * search (```Tab``` to focus, ```Esc``` to clear)
 * tailing [multiple files](#tailing-multiple-files) and [stdin](#stdin)
 * basic authentication
+* Miner configuration, specific to nvidia-miner-node (public repo coming)
 
 ## Installation options
 
-* download a binary file from [Releases](https://github.com/mthenw/frontail/releases) page
-* using [npm package](https://www.npmjs.com/package/frontail): `npm i frontail -g`
-* using [Docker image](https://registry.hub.docker.com/u/mthenw/frontail/): `docker run -d -P -v /var/log:/log mthenw/frontail /log/syslog`
+* Coming doon
 
 ## Usage
 
-    frontail [options] [file ...]
+    miner-frontail [options] [file ...]
 
     Options:
 
@@ -55,6 +49,14 @@
       --ui-no-indent                don't indent log lines
       --ui-highlight                highlight words or lines if defined string found in logs, default preset
       --ui-highlight-preset <path>  custom preset for highlighting (see ./preset/default.json)
+      --config-in <path>            configuration file to be loaded by the config rest call, default /opt/miner/config.json
+      --config-out <path>           configuration file to be saved by the config-save rest call, default /opt/miner/config_new.json
+      --min-power <watts>           minimum acceptable power level for the GPUs, default 80
+      --max-power <watts>           maximum acceptable power level for the GPUs, default 150
+      --max-gpu-oc <mhz>            maximum acceptable gpu overclock, default 0
+      --max-mem-oc <mhz>            maximum acceptable gpu memory overclock, default 0
+      --min-fan-speed <percent>     minimum acceptable gpu fan speed, default 60
+      --max-fan-speed <percent>     maximum acceptable gpu fan speed, default 100
 
 Web interface runs on **http://127.0.0.1:[port]**.
 
