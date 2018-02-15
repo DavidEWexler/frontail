@@ -23,7 +23,7 @@
 
 ## Installation options
 
-* Coming doon
+* Coming soon
 
 ## Usage
 
