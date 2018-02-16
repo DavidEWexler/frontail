@@ -3,15 +3,16 @@
 <head>
     <title>Miner __TITLE__</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/styles/__THEME__.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://10.0.0.214:9001/styles/default.css">
     <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
     <nav class="topbar navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid align-baseline">
             <span class="navbar-brand" href="#">Miner __TITLE__
-              <a href="#"><span class="glyphicon glyphicon-cog"></span> Configure</a>
+              <a href="#" data-toggle="modal" data-target="#configModal"><span class="glyphicon glyphicon-cog"></span> Configure</a>
             </span>
             <form class="navbar-form navbar-right" role="search" onkeypress="return event.keyCode != 13;">
                 <div class="form-group">
@@ -22,11 +23,27 @@
     </nav>
 
     <pre class="log"></pre>
+    
+    <div id="configModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+         </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/tinycon.min.js"></script>
-    <script src="/ansi_up.js"></script>
-    <script src="/app.js"></script>
+    <script src="http://10.0.0.214:9001/socket.io/socket.io.js"></script>
+    <script src="http://10.0.0.214:9001/tinycon.min.js"></script>
+    <script src="http://10.0.0.214:9001/ansi_up.js"></script>
+    <script src="http://10.0.0.214:9001/app.js"></script>
     <script type="text/javascript">
         var socket = new io.connect('/' + '__NAMESPACE__');
 
