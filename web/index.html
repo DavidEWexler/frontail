@@ -11,54 +11,189 @@
 </head>
 <body>
 <body>
-  <nav class="topbar navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid align-baseline">
-      <span class="navbar-brand" href="#">Miner __TITLE__
-        <a href="#" data-toggle="modal" data-target="#configModal"><span class="glyphicon glyphicon-cog"></span> Configure</a>
-      </span>
-      <form class="navbar-form navbar-right" role="search" onkeypress="return event.keyCode != 13;">
-        <div class="form-group">
-          <input type="text" class="form-control query" placeholder="Filter" tabindex="1">
+    <nav class="topbar navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid align-baseline">
+            <span class="navbar-brand" href="#">Miner __TITLE__
+              <a href="#" data-toggle="modal" data-target="#configModal"><span class="glyphicon glyphicon-cog"></span> Configure</a>
+            </span>
+            <form class="navbar-form navbar-right" role="search" onkeypress="return event.keyCode != 13;">
+                <div class="form-group">
+                    <input type="text" class="form-control query" placeholder="Filter" tabindex="1">
+                </div>
+            </form>
+        </div>
+    </nav>
+
+    <pre class="log"></pre>
+    
+    
+    <div id="configModal" class="modal fade" role="dialog">
+      <form>
+        <div class="modal-dialog" style="width: 75%">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">__TITLE__ Miner Configuration</h4>
+            </div>
+            <div class="modal-body">
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#coins">Coin and Pool Settings</a></li>
+                <li><a data-toggle="tab" href="#gpu">GPU Settings</a></li>
+              </ul>
+              
+              <div class="tab-content">
+                <div id="coins" class="tab-pane fade in active">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">Mine</th>
+                        <th scope="col">Coin</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Pool</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>N/A</td>
+                        <td>BTC</td>
+                        <td><input type="text" class="form-control query" tabindex="1" name="btc-address"></td>
+                        <td>
+                          <div class="row form-group">
+                            <div class="col-sm-1">Region:</div>
+                            <div class="col-sm-3">
+                              <select class="form-control query" name="nh-region">
+                                <option value="usa">USA</option>
+                                <option value="eu">Europe</option>
+                                <option value="hk">China</option>
+                                <option value="jp">Japan</option>
+                                <option value="in">India</option>
+                                <option value="br">Brazil</option>
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><input type="radio" name="coin" value="eth" tabindex="2"></td>
+                        <td>ETH</td>
+                        <td><input type="text" class="form-control query" tabindex="3" name="eth-address"></td>
+                        <td><input type="text" class="form-control query" tabindex="4" name="eth-pool"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="radio" name="coin" value="xmr" tabindex="5"></td>
+                        <td>XMR</td>
+                        <td><input type="text" class="form-control query" tabindex="6" name="xmr-address"></td>
+                        <td><input type="text" class="form-control query" tabindex="7" name="xmr-pool"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="radio" name="coin" value="zec" tabindex="8" checked></td>
+                        <td>ZEC</td>
+                        <td><input type="text" class="form-control query" tabindex="9" name="zec-address"></td>
+                        <td>
+                          <div class="row form-group">
+                            <div class="col-sm-9"><input type="text" class="form-control query" tabindex="10" name="zec-pool"></div>
+                            <div class="col-sm-1">:</div>
+                            <div class="col-sm-2"><input type="text" class="form-control query" tabindex="11" name="zec-port"></div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><input type="radio" name="coin" value="zec:YES" tabindex="12"></td>
+                        <td>Equiahash</td>
+                        <td>BTC Rewards via NiceHash</td>
+                      </tr>
+                      <tr>
+                        <td><input type="radio" name="coin" value="lbry:YES" tabindex="13"></td>
+                        <td>Lbry</td>
+                        <td>BTC Rewards via NiceHash</td>
+                      </tr>
+                      <tr>
+                        <td><input type="radio" name="coin" value="lyra2rev2:YES" tabindex="14"></td>
+                        <td>Lyra2REv2</td>
+                        <td>BTC Rewards via NiceHash</td>
+                      </tr>
+                      <tr>
+                        <td><input type="radio" name="coin" value="neoscrypt:YES" tabindex="15"></td>
+                        <td>NeoScrypt</td>
+                        <td>BTC Rewards via NiceHash</td>
+                      </tr>
+                      <tr>
+                        <td><input type="radio" name="coin" value="nist5:YES" tabindex="16"></td>
+                        <td>Nist5</td>
+                        <td>BTC Rewards via NiceHash</td>
+                      </tr>
+                      <tr>
+                        <td><input type="radio" name="coin" value="skunk:YES" tabindex="17"></td>
+                        <td>Skunk</td>
+                        <td>BTC Rewards via NiceHash</td>
+                      </tr>
+                      <tr>
+                        <td><input type="radio" name="coin" value="x11:YES" tabindex="18"></td>
+                        <td>X11</td>
+                        <td>BTC Rewards via NiceHash</td>
+                      </tr>                  
+                    </tbody>
+                  </table>
+                </div>
+                <div id="gpu" class="tab-pane fade in">
+                  <h3>GPU Settings</h3>
+                  <table class="table table-sm" style="width: 35%">
+                    <thead>
+                      <tr>
+                        <th class="col-sm-2" scope="col">Setting</th>
+                        <th class="col-sm-2" scope="col">Value</th>
+                        <th class="col-sm-2" scope="col">Unit</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="col-sm-2">Card Power</td>
+                        <td class="col-sm-2"><input type="text" type="number" class="form-control query" tabindex="19" name="target-watts"></td>
+                        <td class="col-sm-2">Watts</td>
+                      </tr>
+                      <tr>
+                        <td class="col-sm-2">Fan Speed</td>
+                        <td class="col-sm-2"><input type="text" type="number" class="form-control query" tabindex="20" name="fan-speed"></td>
+                        <td class="col-sm-2">Watts</td>
+                      </tr>                
+                      <tr>
+                        <td class="col-sm-2">GPU Overclock</td>
+                        <td class="col-sm-2"><input type="text" type="number" class="form-control query" tabindex="20" name="gpu-overclock"></td>
+                        <td class="col-sm-2">Mhz</td>
+                      </tr>
+                      <tr>
+                        <td class="col-sm-2">Memory Overclock</td>
+                        <td class="col-sm-2"><input type="text" type="number" class="form-control query" tabindex="20" name="memory-overclock"></td>
+                        <td class="col-sm-2">Mhz</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
         </div>
       </form>
     </div>
-  </nav>
-
-  <pre class="log"></pre>
-  
-  <div id="configModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
     
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/tinycon.min.js"></script>
-  <script src="/ansi_up.js"></script>
-  <script src="/app.js"></script>
-  <script type="text/javascript">
-    var socket = new io.connect('/' + '__NAMESPACE__');
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/tinycon.min.js"></script>
+    <script src="/ansi_up.js"></script>
+    <script src="/app.js"></script>
+    <script type="text/javascript">
+        var socket = new io.connect('/' + '__NAMESPACE__');
 
-    window.load = App.init({
-      socket: socket,
-      container: document.getElementsByClassName('log')[0],
-      filterInput: document.getElementsByClassName('query')[0],
-      topbar: document.getElementsByClassName('topbar')[0],
-      body: document.getElementsByTagName('body')[0]
-    });
+        window.load = App.init({
+            socket: socket,
+            container: document.getElementsByClassName('log')[0],
+            filterInput: document.getElementsByClassName('query')[0],
+            topbar: document.getElementsByClassName('topbar')[0],
+            body: document.getElementsByTagName('body')[0]
+        });
   </script>    
-</body>
-</html>
 </body>
 </html>
