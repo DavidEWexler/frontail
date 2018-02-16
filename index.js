@@ -12,6 +12,7 @@ const serverBuilder = require('./lib/server_builder');
 const daemonize = require('./lib/daemonize');
 const fs = require('fs');
 const untildify = require('untildify');
+const os = require('os');
 
 /**
  * Parse args
@@ -48,7 +49,7 @@ if (program.daemonize) {
   }
   appBuilder
     .static(path.join(__dirname, 'web/assets'))
-    .index(path.join(__dirname, 'web/index.html'), files, filesNamespace, program.theme);
+    .index(path.join(__dirname, 'web/index.html'), os.hostname(), filesNamespace, program.theme);
 
   const builder = serverBuilder();
   if (doSecure) {
