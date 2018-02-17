@@ -49,7 +49,7 @@ describe('connectBuilder', () => {
 
     request(app)
       .get('/')
-      .expect('set-cookie', /^sessionkey/, done);
+      .expect('set-cookie', /^connect.sid/, done);
   });
 
   it('should build app that serve static files', (done) => {
