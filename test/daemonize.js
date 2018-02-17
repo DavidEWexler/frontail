@@ -114,6 +114,70 @@ describe('daemonize', () => {
 
       daemon.daemon.lastCall.args[1].should.containDeep(['--ui-hide-topbar']);
     });
+    
+    it('with config-in option', () => {
+      optionsParser.parse(['node', '/path/to/frontail', '--config-in', '/path/to/config']);
+
+      daemonize('script', optionsParser);
+
+      daemon.daemon.lastCall.args[1].should.containDeep(['--config-in', '/path/to/config']);
+    });
+
+    it('with config-out option', () => {
+      optionsParser.parse(['node', '/path/to/frontail', '--config-out', '/path/to/config-out']);
+
+      daemonize('script', optionsParser);
+
+      daemon.daemon.lastCall.args[1].should.containDeep(['--config-in', '/path/to/config-out']);
+    });
+                                                         
+    it('with min-power option', () => {
+      optionsParser.parse(['node', '/path/to/frontail', '--min-power', '80']);
+
+      daemonize('script', optionsParser);
+
+      daemon.daemon.lastCall.args[1].should.containDeep(['--min-power', '80']);
+    });
+    
+    it('with max-power option', () => {
+      optionsParser.parse(['node', '/path/to/frontail', '--max-power', '180']);
+
+      daemonize('script', optionsParser);
+
+      daemon.daemon.lastCall.args[1].should.containDeep(['--max-power', '180']);
+    });
+
+    it('with max-gpu-oc option', () => {
+      optionsParser.parse(['node', '/path/to/frontail', '--max-gpu-oc', '200']);
+
+      daemonize('script', optionsParser);
+
+      daemon.daemon.lastCall.args[1].should.containDeep(['--max-gpu-oc', '200']);
+    });
+    
+    it('with max-mem-oc option', () => {
+      optionsParser.parse(['node', '/path/to/frontail', '--max-mem-oc', '400']);
+
+      daemonize('script', optionsParser);
+
+      daemon.daemon.lastCall.args[1].should.containDeep(['--max-mem-oc', '400']);
+    });
+    
+    it('with min-fan-speed option', () => {
+      optionsParser.parse(['node', '/path/to/frontail', '--min-fan-speed', '50']);
+
+      daemonize('script', optionsParser);
+
+      daemon.daemon.lastCall.args[1].should.containDeep(['--min-fan-speed', '50']);
+    });
+    
+    it('with min-fan-speed option', () => {
+      optionsParser.parse(['node', '/path/to/frontail', '--max-fan-speed', '100']);
+
+      daemonize('script', optionsParser);
+
+      daemon.daemon.lastCall.args[1].should.containDeep(['--max-fan-speed', '100']);
+    });
 
     it('with no-indent option', () => {
       optionsParser.parse(['node', '/path/to/frontail', '--ui-no-indent']);
