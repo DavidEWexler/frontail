@@ -114,7 +114,7 @@ describe('daemonize', () => {
 
       daemon.daemon.lastCall.args[1].should.containDeep(['--ui-hide-topbar']);
     });
-    
+
     it('with config-in option', () => {
       optionsParser.parse(['node', '/path/to/frontail', '--config-in', '/path/to/config']);
 
@@ -130,7 +130,7 @@ describe('daemonize', () => {
 
       daemon.daemon.lastCall.args[1].should.containDeep(['--config-in', '/path/to/config-out']);
     });
-                                                         
+
     it('with min-power option', () => {
       optionsParser.parse(['node', '/path/to/frontail', '--min-power', '80']);
 
@@ -138,7 +138,7 @@ describe('daemonize', () => {
 
       daemon.daemon.lastCall.args[1].should.containDeep(['--min-power', '80']);
     });
-    
+
     it('with max-power option', () => {
       optionsParser.parse(['node', '/path/to/frontail', '--max-power', '180']);
 
@@ -154,7 +154,7 @@ describe('daemonize', () => {
 
       daemon.daemon.lastCall.args[1].should.containDeep(['--max-gpu-oc', '200']);
     });
-    
+
     it('with max-mem-oc option', () => {
       optionsParser.parse(['node', '/path/to/frontail', '--max-mem-oc', '400']);
 
@@ -162,7 +162,7 @@ describe('daemonize', () => {
 
       daemon.daemon.lastCall.args[1].should.containDeep(['--max-mem-oc', '400']);
     });
-    
+
     it('with min-fan-speed option', () => {
       optionsParser.parse(['node', '/path/to/frontail', '--min-fan-speed', '50']);
 
@@ -170,7 +170,7 @@ describe('daemonize', () => {
 
       daemon.daemon.lastCall.args[1].should.containDeep(['--min-fan-speed', '50']);
     });
-    
+
     it('with min-fan-speed option', () => {
       optionsParser.parse(['node', '/path/to/frontail', '--max-fan-speed', '100']);
 
@@ -185,6 +185,14 @@ describe('daemonize', () => {
       daemonize('script', optionsParser);
 
       daemon.daemon.lastCall.args[1].should.containDeep(['--ui-no-indent']);
+    });
+
+    it('with rate-limit option', () => {
+      optionsParser.parse(['node', '/path/to/frontail', '--rate-limit', '50']);
+
+      daemonize('script', optionsParser);
+
+      daemon.daemon.lastCall.args[1].should.containDeep(['--rate-limit', '50']);
     });
 
     it('with highlight option', () => {
