@@ -22,7 +22,7 @@ and is a fork of [frontail](https://github.com/mthenw/frontail/)
 * basic authentication
 * miner configuration, specific to [nvidia-miner-node](https://github.com/DavidEWexler/nvidia-mining-node/)
   - allows selection between BTC (NiceHash), ETH, XMR, and ZEC, and their pools/region
-  - NiceHash algos include CryptoNight, DaggerHashimoto/EthHash, Equihash, Lbry, Lyra2REv2, NeoScrypt, Nist5, Skunk and X11
+  - NiceHash algos include CryptoNight, DaggerHashimoto/Ethash, Equihash, Lbry, Lyra2REv2, NeoScrypt, Nist5, Skunk and X11
   - allows control over gpu power, fan speed, gpu and memory overclocking
 
 ## Installation options
