@@ -3,6 +3,7 @@
 const connectBuilder = require('../lib/connect_builder');
 const request = require('supertest');
 const path = require('path');
+const sha256 = require('sha256');
 
 describe('connectBuilder', () => {
   it('should build connect app', () => {
@@ -21,7 +22,7 @@ describe('connectBuilder', () => {
 
     request(app)
       .get('/')
-      .expect('www-authenticate', 'Basic realm="Authorization Required"')
+      .expect('www-authenticate', 'Basic')
       .expect(401, done);
   });
 
@@ -37,6 +38,23 @@ describe('connectBuilder', () => {
       .get('/')
       .set('Authorization', 'Basic dXNlcjpwYXNz')
       .expect(200, 'secret!', done);
+  });
+
+  it('should build app restricting requests', (done) => {
+    const app = connectBuilder()
+      .limitRate(1)
+      .build();
+    app.use((req, res) => { res.end('works!') });
+
+    // first request should work
+   request(app)
+     .get('/')
+     .expect(100, 'works!', done);
+
+   // second request should fail
+   request(app)
+     .get('/')
+     .expect(429, "This is not the server you're looking for, move along", done);
   });
 
   it('should build app that setup session', (done) => {

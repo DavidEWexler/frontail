@@ -1,6 +1,6 @@
 'use strict';
 
-const connect = require('connect');
+const express = require('express');
 const cookie = require('cookie');
 const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
@@ -43,6 +43,9 @@ if (program.daemonize) {
    * HTTP(s) server setup
    */
   const appBuilder = connectBuilder();
+  if (program.rateLimit > 0) {
+     appBuilder.limitRate(program.rateLimit);
+  }
   if (doAuthorization) {
     appBuilder.session(sessionSecret, doSecure);
     appBuilder.authorize(program.user, program.password);
@@ -166,6 +169,6 @@ function saveConfig(req, res, next) {
   config.target_watts = Math.min(Math.max(config.target_watts, program.minPower), program.maxPower);
   config.gpu_overclock = Math.min(config.gpu_overclock, program.maxGpuOc);
   config.memory_overclock = Math.min(config.memory_overclock, program.maxMemOc);
-  fs.writeFile(program.configOut, JSON.stringify(req.body), { encoding: 'utf-8'});
+  fs.writeFileSync(program.configOut, JSON.stringify(req.body), { encoding: 'utf-8'});
   res.end('{ "saved": "YES" }');
 }
