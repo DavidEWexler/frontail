@@ -25,7 +25,6 @@
 
   <pre class="log"></pre>
     
-    
   <div id="configModal" class="modal fade" role="dialog">
     <form>
       <div class="modal-dialog" style="width: 75%">
@@ -46,8 +45,8 @@
                   <thead>
                     <tr>
                       <th scope="col">Mine</th>
-                      <th scope="col">Algo</th>
-                      <th scope="col">Address</th>
+                      <th scope="col">Coin</th>
+                      <th scope="col" style="width: 40%">Address</th>
                       <th scope="col">Pool/Algo</th>
                     </tr>
                   </thead>
@@ -58,7 +57,7 @@
                       <td><input type="text" class="form-control query" tabindex="2" name="btc-address" id="btc-address"></td>
                       <td>
                         <div class="row form-group">
-                          <div class="col-sm-3">NiceHash Region:</div>
+                          <div class="col-sm-2 text-right">Region:</div>
                           <div class="col-sm-3">
                             <select class="form-control query" name="nh-region" id="nh-region">
                               <option value="usa">USA</option>
@@ -70,7 +69,7 @@
                             </select>
                           </div>
                           <div class="col-sm-2 text-right">Algo:</div>
-                          <div class="col-sm-3">
+                          <div class="col-sm-5">
                             <select class="form-control query" name="algo" id="algo">
                               <option value="xmr">CryptoNight</option>
                               <option value="eth">DaggerHashimoto</option>
@@ -94,7 +93,7 @@
                     </tr>
                     <tr>
                       <td><input type="radio" name="coin" value="xmr" tabindex="6" id="coin-xmr"></td>
-                      <td">XMR</td>
+                      <td>XMR</td>
                       <td><input type="text" class="form-control query" tabindex="7" name="xmr-address" id="xmr-address"></td>
                       <td><input type="text" class="form-control query" tabindex="8" name="xmr-pool" id="xmr-pool"></td>
                     </tr>
