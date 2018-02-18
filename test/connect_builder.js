@@ -3,7 +3,6 @@
 const connectBuilder = require('../lib/connect_builder');
 const request = require('supertest');
 const path = require('path');
-const sha256 = require('sha256');
 
 describe('connectBuilder', () => {
   it('should build connect app', () => {
