@@ -41,7 +41,7 @@ describe('connectBuilder', () => {
 
   it('should build app that setup session', (done) => {
     const app = connectBuilder()
-      .session('secret', 'sessionkey')
+      .session('secret', false)
       .build();
     app.use((req, res) => {
       res.end();

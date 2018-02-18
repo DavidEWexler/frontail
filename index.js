@@ -30,7 +30,6 @@ if (program.args.length === 0) {
 const doAuthorization = !!(program.user && program.password);
 const doSecure = !!(program.key && program.certificate);
 const sessionSecret = String(+new Date()) + Math.random();
-const sessionKey = 'sid';
 const files = program.args.join(' ');
 const filesNamespace = crypto.createHash('md5').update(files).digest('hex');
 
@@ -45,7 +44,7 @@ if (program.daemonize) {
    */
   const appBuilder = connectBuilder();
   if (doAuthorization) {
-    appBuilder.session(sessionSecret, sessionKey);
+    appBuilder.session(sessionSecret, doSecure);
     appBuilder.authorize(program.user, program.password);
   }
   appBuilder
