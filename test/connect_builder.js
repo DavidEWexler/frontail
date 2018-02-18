@@ -118,4 +118,14 @@ describe('connectBuilder', () => {
         done
       );
   });
+
+  it('should build app that supports rest calls', (done) => {
+    const app = connectBuilder()
+      .rest('test', function (req, res, next) { res.end('Works!') })
+      .build();
+
+    request(app)
+      .get('/api/test')
+      .expect('Works!', done);
+  });
 });

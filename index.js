@@ -1,7 +1,8 @@
 'use strict';
 
 const connect = require('connect');
-const cookieParser = require('cookie');
+const cookie = require('cookie');
+const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
 const path = require('path');
 const socketio = require('socket.io');
@@ -48,7 +49,8 @@ if (program.daemonize) {
     appBuilder.authorize(program.user, program.password);
   }
   appBuilder
-    .restGet("config", getConfig)
+    .rest("config", getConfig)
+    .rest("save-config", saveConfig)
     .static(path.join(__dirname, 'web/assets'))
     .index(path.join(__dirname, 'web/index.html'), os.hostname(), filesNamespace, program.theme);
 
@@ -71,21 +73,21 @@ if (program.daemonize) {
 
   if (doAuthorization) {
     io.use((socket, next) => {
-      // const handshakeData = socket.request;
-      // if (handshakeData.headers.cookie) {
-        // const cookies = cookieParser.parse(handshakeData.headers.cookie);
-        // const sessionIdEncoded = cookies[sessionKey];
-        // if (!sessionIdEncoded) {
-        //   return next(new Error('Session cookie not provided'), false);
-        // }
-        // const sessionId = connect.utils.parseSignedCookie(sessionIdEncoded, sessionSecret);
-        // if (sessionId) {
+      const handshakeData = socket.request;
+      if (handshakeData.headers.cookie) {
+        const cookies = cookie.parse(handshakeData.headers.cookie);
+        const sessionIdEncoded = cookies['connect.sid'];
+        if (!sessionIdEncoded) {
+          return next(new Error('Session cookie not provided'), false);
+        }
+        const sessionId = cookieParser.signedCookie(sessionIdEncoded, sessionSecret);
+        if (sessionId) {
           return next(null);
-        // }
-        // return next(new Error('Invalid cookie'), false);
-      // }
+        }
+        return next(new Error('Invalid cookie'), false);
+      }
 
-      // return next(new Error('No cookie in header'), false);
+      return next(new Error('No cookie in header'), false);
     });
   }
 
@@ -156,4 +158,10 @@ if (program.daemonize) {
 function getConfig(req, res, next) {
   res.setHeader('Content-Type', 'application/json');
   res.end(fs.readFileSync(program.configIn, { encoding: 'utf-8'}));
+}
+
+function saveConfig(req, res, next) {
+  res.setHeader('Content-Type', 'application/json');
+  fs.writeFile(program.configOut, JSON.stringify(req.body), { encoding: 'utf-8'});
+  res.end('{ "saved": "YES" }');
 }
