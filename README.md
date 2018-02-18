@@ -1,12 +1,13 @@
 # mining-frontail – mining config and streaming logs to the browser
 
-```mining-frontail``` us currently under development and is a fork of [frontail](https://github.com/mthenw/frontail/)
+```mining-frontail``` is part of the [Nvidia Mining Node](https://github.com/DavidEWexler/nvidia-mining-node/) project
+and is a fork of [frontail](https://github.com/mthenw/frontail/)
 
 ![frontial](https://user-images.githubusercontent.com/455261/29570317-660c8122-8756-11e7-9d2f-8fea19e05211.gif)
 
 ## Quick start
 
-- Coming Soon
+- Installed as part of [Nvidia Mining Node](https://github.com/DavidEWexler/nvidia-mining-node/)
 
 ## Features
 
@@ -19,11 +20,14 @@
 * search (```Tab``` to focus, ```Esc``` to clear)
 * tailing [multiple files](#tailing-multiple-files) and [stdin](#stdin)
 * basic authentication
-* Miner configuration, specific to nvidia-miner-node (public repo coming)
+* miner configuration, specific to [nvidia-miner-node](https://github.com/DavidEWexler/nvidia-mining-node/)
+  - allows selection between BTC (NiceHash), ETH, XMR, and ZEC, and their pools/region
+  - NiceHash algos include CryptoNight, DaggerHashimoto/Ethash, Equihash, Lbry, Lyra2REv2, NeoScrypt, Nist5, Skunk and X11
+  - allows control over gpu power, fan speed, gpu and memory overclocking
 
 ## Installation options
 
-* Coming soon
+* This web Interface is installed automatically as part of [Nvidia Mining Node](https://github.com/DavidEWexler/nvidia-mining-node/)
 
 ## Usage
 
@@ -59,32 +63,3 @@
       --max-fan-speed <percent>     maximum acceptable gpu fan speed, default 100
 
 Web interface runs on **http://127.0.0.1:[port]**.
-
-### Tailing multiple files
-
-`[file ...]` accepts multiple paths, `*`, `?` and other shell special characters([Wildcards, Quotes, Back Quotes and Apostrophes in shell commands](http://www.codecoffee.com/tipsforlinux/articles/26-1.html)).
-
-### stdin
-
-Use `-` for streaming stdin:
-
-    ./server | frontail -
-
-### Highlighting
-
-```--ui-highlight``` option turns on highlighting in UI. By default preset from ```./preset/default.json``` is used:
-
-```
-{
-    "words": {
-        "err": "color: red;"
-    },
-    "lines": {
-        "err": "font-weight: bold;"
-    }
-}
-```
-
-which means that every "err" string will be in red and every line containing "err" will be bolded.
-
-*New presets are very welcome. If you don't like default or you would like to share yours, please create PR with json file.*

@@ -1,42 +1,243 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Miner __TITLE__</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/styles/__THEME__.css">
-    <link rel="icon" href="/favicon.ico">
+  <title>Miner __TITLE__</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="/styles/default.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <nav class="topbar navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid align-baseline">
-            <span class="navbar-brand" href="#">Miner __TITLE__
-              <a href="#"><span class="glyphicon glyphicon-cog"></span> Configure</a>
-            </span>
-            <form class="navbar-form navbar-right" role="search" onkeypress="return event.keyCode != 13;">
-                <div class="form-group">
-                    <input type="text" class="form-control query" placeholder="Filter" tabindex="1">
-                </div>
-            </form>
+  <nav class="topbar navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid align-baseline">
+      <span class="navbar-brand" href="#">Miner __TITLE__
+        <a href="#" data-toggle="modal" data-target="#configModal"><span class="glyphicon glyphicon-cog"></span> Configure</a>
+      </span>
+      <form class="navbar-form navbar-right" role="search" onkeypress="return event.keyCode != 13;">
+        <div class="form-group">
+          <input type="text" class="form-control query" placeholder="Filter" tabindex="1">
         </div>
-    </nav>
+      </form>
+    </div>
+  </nav>
 
-    <pre class="log"></pre>
+  <pre class="log"></pre>
+    
+  <div id="configModal" class="modal fade" role="dialog">
+    <form>
+      <div class="modal-dialog" style="width: 75%">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">__TITLE__ Miner Configuration</h4>
+          </div>
+          <div class="modal-body">
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#coins">Coin and Pool Settings</a></li>
+              <li><a data-toggle="tab" href="#gpu">GPU Settings</a></li>
+            </ul>
+             
+            <div class="tab-content">
+              <div id="coins" class="tab-pane fade in active">
+                <table class="table table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col">Mine</th>
+                      <th scope="col">Coin</th>
+                      <th scope="col" style="width: 40%">Address</th>
+                      <th scope="col">Pool/Algo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><input type="radio" name="coin" value="nh" tabindex="1" id="coin-nh"></td>
+                      <td>BTC</td>
+                      <td><input type="text" class="form-control query" tabindex="2" name="btc-address" id="btc-address"></td>
+                      <td>
+                        <div class="row form-group">
+                          <div class="col-sm-2 text-right">Region:</div>
+                          <div class="col-sm-3">
+                            <select class="form-control query" name="nh-region" id="nh-region">
+                              <option value="usa">USA</option>
+                              <option value="eu">Europe</option>
+                              <option value="hk">China</option>
+                              <option value="jp">Japan</option>
+                              <option value="in">India</option>
+                              <option value="br">Brazil</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-2 text-right">Algo:</div>
+                          <div class="col-sm-5">
+                            <select class="form-control query" name="algo" id="algo">
+                              <option value="xmr">CryptoNight</option>
+                              <option value="eth">DaggerHashimoto</option>
+                              <option value="zec">Equihash</option>
+                              <option value="lbry">Lbry</option>
+                              <option value="lyra2rev2">Lyra2REv2</option>
+                              <option value="neoscrypt">NeoScrypt</option>
+                              <option value="nist5">Nist5</option>
+                              <option value="skunk">Skunk</option>
+                              <option value="x11">X11</option>
+                            </select>                            
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="radio" name="coin" value="eth" tabindex="3" id="coin-eth"></td>
+                      <td>ETH</td>
+                      <td><input type="text" class="form-control query" tabindex="4" name="eth-address" id="eth-address"></td>
+                      <td><input type="text" class="form-control query" tabindex="5" name="eth-pool" id="eth-pool"></td>
+                    </tr>
+                    <tr>
+                      <td><input type="radio" name="coin" value="xmr" tabindex="6" id="coin-xmr"></td>
+                      <td>XMR</td>
+                      <td><input type="text" class="form-control query" tabindex="7" name="xmr-address" id="xmr-address"></td>
+                      <td><input type="text" class="form-control query" tabindex="8" name="xmr-pool" id="xmr-pool"></td>
+                    </tr>
+                    <tr>
+                      <td><input type="radio" name="coin" value="zec" tabindex="9" id="coin-zec" checked></td>
+                      <td>ZEC</td>
+                      <td><input type="text" class="form-control query" tabindex="10" name="zec-address" id="zec-address"></td>
+                      <td>
+                        <div class="row form-group row-sm">
+                          <div class="col-sm-8"><input type="text" class="form-control query" tabindex="11" name="zec-pool" id="zec-pool"></div>
+                          <div class="col-sm-1">:</div>
+                          <div class="col-sm-3"><input type="text" class="form-control query" tabindex="12" name="zec-port" id="zec-port"></div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                     <td colspan="2">Email</td>
+                     <td colspan="2">
+                       <input type="text" class="form-control query" tabindex="13" name="email" id="email">
+                       For Nanopool Notifications
+                     </td>
+                    </tr>                
+                  </tbody>
+                </table>
+              </div>
+              <div id="gpu" class="tab-pane fade in">
+                <h3>GPU Settings</h3>
+                <table class="table table-sm" style="width: 50%">
+                  <thead>
+                    <tr>
+                      <th class="col-sm-2" scope="col">Setting</th>
+                      <th class="col-sm-2" scope="col">Value</th>
+                      <th class="col-sm-2" scope="col">Unit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="col-sm-2">Card Power</td>
+                      <td class="col-sm-2"><input type="text" type="number" class="form-control query" tabindex="19" name="target-watts" id="target-watts"></td>
+                      <td class="col-sm-2">Watts</td>
+                    </tr>
+                    <tr>
+                      <td class="col-sm-2">Fan Speed</td>
+                      <td class="col-sm-2"><input type="text" type="number" class="form-control query" tabindex="20" name="fan-speed" id="fan-speed"></td>
+                      <td class="col-sm-2">Percent</td>
+                    </tr>                
+                    <tr>
+                      <td class="col-sm-2">GPU Overclock</td>
+                      <td class="col-sm-2"><input type="text" type="number" class="form-control query" tabindex="20" name="gpu-overclock" id="gpu-overclock"></td>
+                      <td class="col-sm-2">Mhz</td>
+                    </tr>
+                    <tr>
+                      <td class="col-sm-2">Memory Overclock</td>
+                      <td class="col-sm-2"><input type="text" type="number" class="form-control query" tabindex="20" name="memory-overclock" id="memory-overclock"></td>
+                      <td class="col-sm-2">Mhz</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveConfig()">Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+    
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/tinycon.min.js"></script>
+  <script src="/ansi_up.js"></script>
+  <script src="/app.js"></script>
+  <script type="text/javascript">
+    var socket = new io.connect('/' + '__NAMESPACE__');
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/tinycon.min.js"></script>
-    <script src="/ansi_up.js"></script>
-    <script src="/app.js"></script>
-    <script type="text/javascript">
-        var socket = new io.connect('/' + '__NAMESPACE__');
+    window.load = App.init({
+      socket: socket,
+      container: document.getElementsByClassName('log')[0],
+      filterInput: document.getElementsByClassName('query')[0],
+      topbar: document.getElementsByClassName('topbar')[0],
+      body: document.getElementsByTagName('body')[0]
+    });
 
-        window.load = App.init({
-            socket: socket,
-            container: document.getElementsByClassName('log')[0],
-            filterInput: document.getElementsByClassName('query')[0],
-            topbar: document.getElementsByClassName('topbar')[0],
-            body: document.getElementsByTagName('body')[0]
-        });
+    $(document).ready( function() {
+      $.ajax({
+        url: "/api/config",
+        success: function (result) {
+          $('#algo').val(result.mining);
+          $('#btc-address').val(result.btc_address);
+          $('#nh-region').val(result.nh_region);
+          $('#eth-address').val(result.eth_address);
+          $('#eth-pool').val(result.eth_pool);
+          $('#xmr-address').val(result.xmr_address);
+          $('#xmr-pool').val(result.xmr_pool);
+          $('#zec-address').val(result.zec_address);
+          $('#zec-pool').val(result.zec_pool);
+          $('#zec-port').val(result.zec_port);
+          $('#target-watts').val(result.target_watts);
+          $('#fan-speed').val(result.fan_speed);
+          $('#gpu-overclock').val(result.gpu_overclock);
+          $('#memory-overclock').val(result.memory_overclock);
+          $('#email').val(result.email);
+          if (result.nh_enabled == 'YES') {
+            $("#coin-nh").prop("checked", true);
+          } else {
+            var coinKey = "#coin-" + result.mining;
+            $(coinKey).prop("checked", true);
+          }
+        }
+      });
+    });
+
+    function saveConfig() {
+      var coin = $('input[name=coin]:checked').val();
+      var nhEnabled = (coin === 'nh') ? 'YES' : 'no';
+      coin = $('#algo').val();
+      var config = {
+        mining: coin,
+        nh_enabled: nhEnabled,
+        btc_address: $('#btc-address').val(),
+        nh_region: $('#nh-region').val(),
+        eth_address: $('#eth-address').val(),
+        eth_pool: $('#eth-pool').val(),
+        xmr_address: $('#xmr-address').val(),
+        xmr_pool: $('#xmr-pool').val(),
+        zec_address: $('#zec-address').val(),
+        zec_pool: $('#zec-pool').val(),
+        zec_port: $('#zec-port').val(),
+        target_watts: $('#target-watts').val(),
+        fan_speed: $('#fan-speed').val(),
+        gpu_overclock: $('#gpu-overclock').val(),
+        memory_overclock: $('#memory-overclock').val(),
+        email: $('#email').val()
+      };
+      $.ajax({
+        url: '/api/save-config',
+        type: 'post',
+        dataType: 'application/json',
+        data: config,
+        success: function(data) { alert("Configuration Saved"); }
+      });
+    }
   </script>
 </body>
 </html>

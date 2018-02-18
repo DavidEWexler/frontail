@@ -1,7 +1,8 @@
 'use strict';
 
 const connect = require('connect');
-const cookieParser = require('cookie');
+const cookie = require('cookie');
+const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
 const path = require('path');
 const socketio = require('socket.io');
@@ -29,7 +30,6 @@ if (program.args.length === 0) {
 const doAuthorization = !!(program.user && program.password);
 const doSecure = !!(program.key && program.certificate);
 const sessionSecret = String(+new Date()) + Math.random();
-const sessionKey = 'sid';
 const files = program.args.join(' ');
 const filesNamespace = crypto.createHash('md5').update(files).digest('hex');
 
@@ -44,10 +44,12 @@ if (program.daemonize) {
    */
   const appBuilder = connectBuilder();
   if (doAuthorization) {
-    appBuilder.session(sessionSecret, sessionKey);
+    appBuilder.session(sessionSecret, doSecure);
     appBuilder.authorize(program.user, program.password);
   }
   appBuilder
+    .rest("config", getConfig)
+    .rest("save-config", saveConfig)
     .static(path.join(__dirname, 'web/assets'))
     .index(path.join(__dirname, 'web/index.html'), os.hostname(), filesNamespace, program.theme);
 
@@ -72,12 +74,12 @@ if (program.daemonize) {
     io.use((socket, next) => {
       const handshakeData = socket.request;
       if (handshakeData.headers.cookie) {
-        const cookies = cookieParser.parse(handshakeData.headers.cookie);
-        const sessionIdEncoded = cookies[sessionKey];
+        const cookies = cookie.parse(handshakeData.headers.cookie);
+        const sessionIdEncoded = cookies['connect.sid'];
         if (!sessionIdEncoded) {
           return next(new Error('Session cookie not provided'), false);
         }
-        const sessionId = connect.utils.parseSignedCookie(sessionIdEncoded, sessionSecret);
+        const sessionId = cookieParser.signedCookie(sessionIdEncoded, sessionSecret);
         if (sessionId) {
           return next(null);
         }
@@ -150,4 +152,20 @@ if (program.daemonize) {
   };
   process.on('SIGINT', cleanExit);
   process.on('SIGTERM', cleanExit);
+}
+
+function getConfig(req, res, next) {
+  res.setHeader('Content-Type', 'application/json');
+  res.end(fs.readFileSync(program.configIn, { encoding: 'utf-8'}));
+}
+
+function saveConfig(req, res, next) {
+  res.setHeader('Content-Type', 'application/json');
+  var config = req.body;
+  config.fan_speed = Math.min(Math.max(config.fan_speed, program.minFanSpeed), program.maxFanSpeed);
+  config.target_watts = Math.min(Math.max(config.target_watts, program.minPower), program.maxPower);
+  config.gpu_overclock = Math.min(config.gpu_overclock, program.maxGpuOc);
+  config.memory_overclock = Math.min(config.memory_overclock, program.maxMemOc);
+  fs.writeFile(program.configOut, JSON.stringify(req.body), { encoding: 'utf-8'});
+  res.end('{ "saved": "YES" }');
 }

@@ -41,7 +41,7 @@ describe('connectBuilder', () => {
 
   it('should build app that setup session', (done) => {
     const app = connectBuilder()
-      .session('secret', 'sessionkey')
+      .session('secret', false)
       .build();
     app.use((req, res) => {
       res.end();
@@ -49,7 +49,7 @@ describe('connectBuilder', () => {
 
     request(app)
       .get('/')
-      .expect('set-cookie', /^sessionkey/, done);
+      .expect('set-cookie', /^connect.sid/, done);
   });
 
   it('should build app that serve static files', (done) => {
@@ -117,5 +117,15 @@ describe('connectBuilder', () => {
         '<head><title>/testfile</title><link href="default.css" rel="stylesheet" type="text/css"/></head>',
         done
       );
+  });
+
+  it('should build app that supports rest calls', (done) => {
+    const app = connectBuilder()
+      .rest('test', function (req, res, next) { res.end('Works!') })
+      .build();
+
+    request(app)
+      .get('/api/test')
+      .expect('Works!', done);
   });
 });
