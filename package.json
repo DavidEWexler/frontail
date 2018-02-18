@@ -1,7 +1,7 @@
 {
   "name": "mining-frontail",
   "version": "4.1.2",
-  "description": "streaming logs to the browser",
+  "description": "streaming logs to the browser and miner configuration",
   "homepage": "https://github.com/DavidEWexler/mining-frontail",
   "author": "David E Wexler <david.e.wexler@gmail.com>",
   "license": "MIT",
