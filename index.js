@@ -162,6 +162,11 @@ function getConfig(req, res, next) {
 
 function saveConfig(req, res, next) {
   res.setHeader('Content-Type', 'application/json');
+  var config = req.body;
+  config.fan_speed = Math.min(Math.max(config.fan_speed, program.minFanSpeed), program.maxFanSpeed);
+  config.target_watts = Math.min(Math.max(config.target_watts, program.minPower), program.maxPower);
+  config.gpu_overclock = Math.min(config.gpu_overclock, program.maxGpuOc);
+  config.memory_overclock = Math.min(config.memory_overclock, program.maxMemOc);
   fs.writeFile(program.configOut, JSON.stringify(req.body), { encoding: 'utf-8'});
   res.end('{ "saved": "YES" }');
 }
