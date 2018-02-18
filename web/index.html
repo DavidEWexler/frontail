@@ -46,29 +46,15 @@
                   <thead>
                     <tr>
                       <th scope="col">Mine</th>
-                      <th scope="col">Coin</th>
                       <th scope="col">Algo</th>
                       <th scope="col">Address</th>
-                      <th scope="col">Pool</th>
+                      <th scope="col">Pool/Algo</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td><input type="radio" name="coin" value="nh" tabindex="1" id="coin-nh"></td>
                       <td>BTC</td>
-                      <td>
-                        <select class="form-control query" name="algo" id="algo">
-                          <option value="xmr">CryptoNight</option>
-                          <option value="eth">DaggerHashimoto</option>
-                          <option value="zec">Equihash</option>
-                          <option value="lbry">Lbry</option>
-                          <option value="lyra2rev2">Lyra2REv2</option>
-                          <option value="neoscrypt">NeoScrypt</option>
-                          <option value="nist5">Nist5</option>
-                          <option value="skunk">Skunk</option>
-                          <option value="x11">X11</option>
-                        </select>
-                      </td>
                       <td><input type="text" class="form-control query" tabindex="2" name="btc-address" id="btc-address"></td>
                       <td>
                         <div class="row form-group">
@@ -83,24 +69,38 @@
                               <option value="br">Brazil</option>
                             </select>
                           </div>
+                          <div class="col-sm-2 text-right">Algo:</div>
+                          <div class="col-sm-3">
+                            <select class="form-control query" name="algo" id="algo">
+                              <option value="xmr">CryptoNight</option>
+                              <option value="eth">DaggerHashimoto</option>
+                              <option value="zec">Equihash</option>
+                              <option value="lbry">Lbry</option>
+                              <option value="lyra2rev2">Lyra2REv2</option>
+                              <option value="neoscrypt">NeoScrypt</option>
+                              <option value="nist5">Nist5</option>
+                              <option value="skunk">Skunk</option>
+                              <option value="x11">X11</option>
+                            </select>                            
+                          </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td><input type="radio" name="coin" value="eth" tabindex="3" id="coin-eth"></td>
-                      <td colspan="2">ETH</td>
+                      <td>ETH</td>
                       <td><input type="text" class="form-control query" tabindex="4" name="eth-address" id="eth-address"></td>
                       <td><input type="text" class="form-control query" tabindex="5" name="eth-pool" id="eth-pool"></td>
                     </tr>
                     <tr>
                       <td><input type="radio" name="coin" value="xmr" tabindex="6" id="coin-xmr"></td>
-                      <td colspan="2">XMR</td>
+                      <td">XMR</td>
                       <td><input type="text" class="form-control query" tabindex="7" name="xmr-address" id="xmr-address"></td>
                       <td><input type="text" class="form-control query" tabindex="8" name="xmr-pool" id="xmr-pool"></td>
                     </tr>
                     <tr>
                       <td><input type="radio" name="coin" value="zec" tabindex="9" id="coin-zec" checked></td>
-                      <td colspan="2">ZEC</td>
+                      <td>ZEC</td>
                       <td><input type="text" class="form-control query" tabindex="10" name="zec-address" id="zec-address"></td>
                       <td>
                         <div class="row form-group row-sm">
@@ -116,7 +116,6 @@
                        <input type="text" class="form-control query" tabindex="13" name="email" id="email">
                        For Nanopool Notifications
                      </td>
-                     <td></td>
                     </tr>                
                   </tbody>
                 </table>
