@@ -7,7 +7,7 @@ and is a fork of [frontail](https://github.com/mthenw/frontail/)
 
 ## Quick start
 
-- Installed as part of [CUDA Mining Node](https://github.com/DavidEWexler/cuda-mining-node/)
+- Installed as part of [Nvidia Mining Node](https://github.com/DavidEWexler/nvidia-mining-node/)
 
 ## Features
 
@@ -20,10 +20,10 @@ and is a fork of [frontail](https://github.com/mthenw/frontail/)
 * search (```Tab``` to focus, ```Esc``` to clear)
 * tailing [multiple files](#tailing-multiple-files) and [stdin](#stdin)
 * basic authentication
-* miner configuration, specific to [nvidia-miner-node](https://github.com/DavidEWexler/nvidia-mining-node/) (public repo coming)
+* miner configuration, specific to [nvidia-miner-node](https://github.com/DavidEWexler/nvidia-mining-node/)
   - allows selection between BTC (NiceHash), ETH, XMR, and ZEC, and their pools/region
-  - niceHash algos include CryptoNight, DaggerHashimoto/EthHash, Equihash, Lbry, Lyra2REv2, NeoScrypt, Nist5, Skunk and X11
-  - allows control over GPU power, fan speed, gpu and memory overclocking
+  - NiceHash algos include CryptoNight, DaggerHashimoto/EthHash, Equihash, Lbry, Lyra2REv2, NeoScrypt, Nist5, Skunk and X11
+  - allows control over gpu power, fan speed, gpu and memory overclocking
 
 ## Installation options
 
