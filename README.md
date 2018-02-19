@@ -1,13 +1,13 @@
 # mining-frontail – mining config and streaming logs to the browser
 
-```mining-frontail``` is part of the [Nvidia Mining Node](https://github.com/DavidEWexler/nvidia-mining-node/) project
+```mining-frontail``` is part of the [Crypto Mining Node](https://github.com/DavidEWexler/crypto-mining-node/) project
 and is a fork of [frontail](https://github.com/mthenw/frontail/)
 
 ![frontial](https://user-images.githubusercontent.com/455261/29570317-660c8122-8756-11e7-9d2f-8fea19e05211.gif)
 
 ## Quick start
 
-- Installed as part of [Nvidia Mining Node](https://github.com/DavidEWexler/nvidia-mining-node/)
+- Installed as part of [Crypto Mining Node](https://github.com/DavidEWexler/crypto-mining-node/)
 
 ## Features
 
@@ -27,7 +27,7 @@ and is a fork of [frontail](https://github.com/mthenw/frontail/)
 
 ## Installation options
 
-* This web Interface is installed automatically as part of [Nvidia Mining Node](https://github.com/DavidEWexler/nvidia-mining-node/)
+* This web Interface is installed automatically as part of [Crypto Mining Node](https://github.com/DavidEWexler/crypto-mining-node/)
 
 ## Usage
 
